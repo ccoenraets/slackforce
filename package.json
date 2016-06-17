@@ -1,8 +1,8 @@
 {
-  "name": "slack",
+  "name": "slackforce",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.2",
-    "botkit": "^0.1.1",
     "express": "^4.13.3",
-    "nforce": "^1.3.3"
+    "request": "^2.72.0"
   }
 }

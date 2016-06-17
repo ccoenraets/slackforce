@@ -20,7 +20,7 @@ If you haven't already done so, follow the steps below to create a Salesforce co
     - API Name: MyConnectedApp
     - Contact Email: enter your email address
     - Enabled OAuth Settings: Checked
-    - Callback URL: http://localhost:8200/oauthcallback.html (You'll change this later)
+    - Callback URL: https://myapp.herokuapp.com/oauthcallback (You'll change this later)
     - Selected OAuth Scopes: Full Access (full)
     - Click **Save**
 
@@ -37,9 +37,13 @@ If you haven't already done so, follow the steps below to create a Salesforce co
     - For **SF_CLIENT_SECRET**, enter the Consumer Secret of your Salesforce Connected App
     - For **SF_USER_NAME**, enter the the username of your Salesforce integration user
     - For **SF_PASSWORD**, enter the the username of your Salesforce integration user
-    - Leave **SLACK_OPPORTUNITY_TOKEN** blank for now.
+    - Leave **SLACK_ACCOUNT_TOKEN** blank for now.
     - Leave **SLACK_CONTACT_TOKEN** blank for now.
+    - Leave **SLACK_OPPORTUNITY_TOKEN** blank for now.
     - Leave **SLACK_CASE_TOKEN** blank for now.
+    - Leave **SLACK_WHOAMI_TOKEN** blank for now.
+
+1. Once your app is deployed, go back to the Connected App in Salesforce, and change the OAuth callback URL: Use the URL of your actuall Heroku app, followd by /oauthcallback. For example: https://mynewapp.herokuapp.com/oauthcallback
 
 ### Step 3: Create the Slash Commands in Slack
 
@@ -59,7 +63,10 @@ If you haven't already done so, follow the steps below to create a Salesforce co
     
     Click **Save Integration**.
     
+1. Repeat these steps to create another Slash command called **/account**, calling ```https://your-heroku-app.herokuapp.com/account```. In the Heroku dashboard, set the **SLACK_ACCOUNT_TOKEN** config var to the value of the token that was generated in Slack.    
+
 1. Repeat these steps to create another Slash command called **/contact**, calling ```https://your-heroku-app.herokuapp.com/contact```. In the Heroku dashboard, set the **SLACK_CONTACT_TOKEN** config var to the value of the token that was generated in Slack.    
 
 1. Repeat these steps to create another Slash command called **/case**, calling ```https://your-heroku-app.herokuapp.com/case```. In the Heroku dashboard, set the **SLACK_CASE_TOKEN** config var to the value of the token that was generated in Slack.    
 
+1. Repeat these steps to create another Slash command called **/whoami**, calling ```https://your-heroku-app.herokuapp.com/whoami```. In the Heroku dashboard, set the **SLACK_WHOAMI_TOKEN** config var to the value of the token that was generated in Slack.    

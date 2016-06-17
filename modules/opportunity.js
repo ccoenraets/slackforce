@@ -1,46 +1,60 @@
-var org = require('./auth').org,
+"use strict";
+
+let auth = require("./slack-salesforce-auth"),
+    force = require("./force"),
 
     OPPORTUNITY_TOKEN = process.env.SLACK_OPPORTUNITY_TOKEN;
 
-function execute(req, res) {
+exports.execute = (req, res) => {
 
     if (req.body.token != OPPORTUNITY_TOKEN) {
         res.send("Invalid token");
         return;
     }
 
-    var limit = req.body.text;
+    let slackUserId = req.body.user_id,
+        oauthObj = auth.getOAuthObject(slackUserId),
+        limit = req.body.text,
+        q = "SELECT Id, Name, Amount, Probability, StageName, CloseDate FROM Opportunity where isClosed=false ORDER BY amount DESC LIMIT " + limit;
+
     if (!limit || limit=="") limit = 5;
 
-    var q = "SELECT Id, Name, Amount, Probability, StageName, CloseDate FROM Opportunity where isClosed=false ORDER BY amount DESC LIMIT " + limit;
-    org.query({query: q}, function(err, resp) {
-        if (err) {
-            console.error(err);
-            res.send("An error as occurred");
-            return;
-        }
-        if (resp.records && resp.records.length>0) {
-            var opportunities = resp.records;
-            var attachments = [];
-            opportunities.forEach(function(opportunity) {
-                var fields = [];
-                fields.push({title: "Opportunity", value: opportunity.get("Name"), short:true});
-                fields.push({title: "Link", value: "https://login.salesforce.com/" + opportunity.getId(), short:true});
-                fields.push({title: "Stage", value: opportunity.get("StageName"), short:true});
-                fields.push({title: "Close Date", value: opportunity.get("CloseDate"), short:true});
-                fields.push({title: "Amount", value: new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(opportunity.get("Amount")), short:true});
-                fields.push({title: "Probability", value: opportunity.get("Probability") + "%", short:true});
-                attachments.push({color: "#FCB95B", fields: fields});
-            });
-            res.json({
-                response_type: "in_channel",
-                text: "Top " + limit + " opportunities in the pipeline:",
-                attachments: attachments
-            });
-        } else {
-            res.send("No records");
-        }
-    });
-}
-
-exports.execute = execute;
+    force.query(oauthObj, q)
+        .then(data => {
+            let opportunities = JSON.parse(data).records;
+            if (opportunities && opportunities.length > 0) {
+                let attachments = [];
+                opportunities.forEach(function (opportunity) {
+                    let fields = [];
+                    fields.push({title: "Opportunity", value: opportunity.Name, short: true});
+                    fields.push({title: "Stage", value: opportunity.StageName, short: true});
+                    fields.push({title: "Close Date", value: opportunity.CloseDate, short: true});
+                    fields.push({
+                        title: "Amount",
+                        value: new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD'
+                        }).format(opportunity.Amount),
+                        short: true
+                    });
+                    fields.push({title: "Probability", value: opportunity.Probability + "%", short: true});
+                    fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + opportunity.Id, short:false});
+                    attachments.push({color: "#FCB95B", fields: fields});
+                });
+                res.json({
+                    text: "Top " + limit + " opportunities in the pipeline:",
+                    attachments: attachments
+                });
+            } else {
+                res.send("No records");
+            }
+        })
+        .catch(error => {
+            if (error.code == 401) {
+                res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/` + slackUserId);
+            } else {
+                console.log(error);
+                res.send("An error as occurred");
+            }
+        });
+};
