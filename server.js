@@ -25,6 +25,7 @@ app.post('/account', account.execute);
 app.post('/case', _case.execute);
 app.post('/whoami', whoami.execute);
 app.post('/login', auth.loginLink);
+app.post('/logout', auth.logout);
 app.get('/login/:slackUserId', auth.oauthLogin);
 app.get('/oauthcallback', auth.oauthCallback);
 

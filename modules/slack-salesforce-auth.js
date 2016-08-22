@@ -7,6 +7,20 @@ var SLACK_LOGIN_TOKEN = process.env.SLACK_LOGIN_TOKEN,
     request = require('request'),
     mappings = {};
 
+exports.logout = (req,res) => {
+
+    if (req.body.token != SLACK_LOGOUT_TOKEN) {
+        res.send("Invalid token");
+        return;
+    }
+
+    let slackUserId = req.body.user_id;
+    delete mappings[slackUserId];
+
+    res.send('Logged out');
+
+};
+
 exports.loginLink = (req, res) => {
 
     if (req.body.token != SLACK_LOGIN_TOKEN) {
