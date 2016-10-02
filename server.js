@@ -8,6 +8,7 @@ let express = require('express'),
     opportunity = require('./modules/opportunity'),
     _case = require('./modules/case'),
     whoami = require('./modules/whoami'),
+    actions = require('./modules/actions'),
     app = express();
 
 
@@ -19,6 +20,7 @@ app.use('/', express.static(__dirname + '/www')); // serving company logos after
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.post('/actions', actions.handle);
 app.post('/pipeline', opportunity.execute);
 app.post('/contact', contact.execute);
 app.post('/account', account.execute);
