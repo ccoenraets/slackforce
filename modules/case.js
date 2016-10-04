@@ -25,6 +25,7 @@ exports.execute = (req, res) => {
             status: "New"
         })
         .then(data => {
+            console.log(data);
             let fields = [];
             fields.push({title: "Subject", value: subject, short:false});
             fields.push({title: "Description", value: description, short:false});
