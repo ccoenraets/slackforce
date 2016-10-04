@@ -41,27 +41,7 @@ exports.execute = (req, res) => {
                     fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + opportunity.Id, short:false});
                     attachments.push({
                         color: "#FCB95B",
-                        fields: fields,
-                        actions: [
-                            {
-                                "name": "won",
-                                "text": "Close Won",
-                                "type": "button",
-                                "value": opportunity.Id
-                            },
-                            {
-                                "name": "lost",
-                                "text": "Close Lost",
-                                "type": "button",
-                                "value": opportunity.Id
-                            },
-                            {
-                                "name": "open",
-                                "text": "Open in Salesforce",
-                                "type": "button",
-                                "value": opportunity.Id
-                            }
-                        ]
+                        fields: fields
                     });
                 });
                 res.json({
