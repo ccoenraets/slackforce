@@ -28,7 +28,6 @@ exports.execute = (req, res) => {
                     let fields = [];
                     fields.push({title: "Opportunity", value: opportunity.Name, short: true});
                     fields.push({title: "Stage", value: opportunity.StageName, short: true});
-                    fields.push({title: "Close Date", value: opportunity.CloseDate, short: true});
                     fields.push({
                         title: "Amount",
                         value: new Intl.NumberFormat('en-US', {
