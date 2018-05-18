@@ -1,16 +1,19 @@
 {
-  "name": "slackforce",
+  "name": "SlackForceZQuote",
   "version": "1.0.0",
-  "description": "",
+  "description": "Oryginally developed by Christophe Coenraets <ccoenraets@gmail.com> (http://coenraets.org/) and published under ISC licence - so big credits to Christophe for doing 95+% of the work!",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Christophe Coenraets <ccoenraets@gmail.com> (http://coenraets.org/)",
+  "author": "Bartosz Dec <bbdecyk@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
     "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "ws": "3.3.2"
   }
 }

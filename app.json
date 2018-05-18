@@ -1,5 +1,5 @@
 {
-  "name": "Slackforce",
+  "name": "SlackForceZQuote",
   "description": "Simple message broker to enable Slack to Salesforce communication using Slash Commands",
   "env": {
     "SF_CLIENT_ID": {
@@ -22,31 +22,20 @@
         "description": "Salesforce login URL",
         "value":"https://login.salesforce.com"
     },
+    "SLACK_QUOTE_TOKEN": {
+      "description": "Slack token for the quote slash command",
+      "value":"",
+      "required":false
+    },
     "SLACK_ACCOUNT_TOKEN": {
-        "description": "Slack token for the account slash command",
-        "value":"",
-        "required":false
+      "description": "Slack token for the account slash command",
+      "value":"",
+      "required":false
     },
     "SLACK_CONTACT_TOKEN": {
       "description": "Slack token for the contact slash command",
       "value":"",
       "required":false
-    },
-    "SLACK_OPPORTUNITY_TOKEN": {
-        "description": "Slack token for the pipeline slash command",
-        "value":"",
-        "required":false
-
-    },
-    "SLACK_CASE_TOKEN": {
-        "description": "Slack token for the case slash command",
-        "value":"",
-        "required":false
-    },
-    "SLACK_WHOAMI_TOKEN": {
-        "description": "Slack token for the whoami slash command",
-        "value":"",
-        "required":false
     }
   }
 }
