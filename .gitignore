@@ -2,3 +2,4 @@ node_modules
 setenv.sh
 .idea
 .DS_Store
+.env
