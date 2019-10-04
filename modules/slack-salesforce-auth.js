@@ -34,7 +34,7 @@ exports.loginLink = (req, res) => {
 };
 
 exports.oauthLogin = (req, res) => {
-    res.redirect(`${SF_LOGIN_URL}/services/oauth2/authorize?response_type=code&client_id=${SF_CLIENT_ID}&redirect_uri=${req.hostname}/oauthcallback&state=${req.params.slackUserId}`);
+    res.redirect(`${SF_LOGIN_URL}/services/oauth2/authorize?response_type=code&client_id=${SF_CLIENT_ID}&redirect_uri=https://${req.hostname}/oauthcallback&state=${req.params.slackUserId}`);
 };
 
 exports.oauthCallback = (req, res) => {
