@@ -14,7 +14,7 @@ let express = require('express'),
 
 app.enable('trust proxy');
 
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 
 app.use('/', express.static(__dirname + '/www')); // serving company logos after successful authentication
 
