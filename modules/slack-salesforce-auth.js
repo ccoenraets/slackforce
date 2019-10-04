@@ -29,7 +29,7 @@ exports.loginLink = (req, res) => {
         return;
     }
 
-    res.send(`Visit this URL to login to Salesforce: https://login.${req.hostname}` + req.body.user_id);
+    res.send(`Visit this URL to login to Salesforce: https://login/${req.hostname}` + req.body.user_id);
 
 };
 
