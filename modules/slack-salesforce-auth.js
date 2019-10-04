@@ -48,7 +48,7 @@ exports.oauthCallback = (req, res) => {
             code: req.query.code,
             client_id: SF_CLIENT_ID,
             client_secret: SF_CLIENT_SECRET,
-            redirect_uri: `${req.hostname}/oauthcallback`
+            redirect_uri: `https://${req.hostname}/oauthcallback`
         }
     };
 
