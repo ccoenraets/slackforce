@@ -29,13 +29,13 @@ exports.execute = (req, res) => {
             fields.push({title: "Subject", value: subject, short:false});
             fields.push({title: "Description", value: description, short:false});
             fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + data.id, short:false});
-            let message = {
+          /*  let message = {
                 text: "A new case has been created:",
                 attachments: [
                     {color: "#F2CF5B", fields: fields}
                 ]
-            };
-            res.json(message);
+            };*/
+            res.json(fields);
         })
         .catch((error) => {
             if (error.code == 401) {
