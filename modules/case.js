@@ -28,7 +28,13 @@ exports.execute = (req, res) => {
             let fields = [];
            
             fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + data.id, short:false});
-           let message = {
+          fields.push({
+  "label": "Assignee",
+  "name": "bug_assignee",
+  "type": "select",
+  "data_source": "users"
+})  
+        let message = {
                 text: "",
                 attachments: [
                     {color: "#F2CF5B", fields: fields}
