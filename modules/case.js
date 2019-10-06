@@ -34,7 +34,7 @@ exports.execute = (req, res) => {
                     {color: "#F2CF5B", fields: fields}
                 ]
             };
-           res.json(fields);
+           res.json(message);
         })
         .catch((error) => {
             if (error.code == 401) {
