@@ -38,7 +38,7 @@ exports.execute = (req, res) => {
   "name": "bug_assignee",
   "type": "select",
   "data_source": "users"
-                    }
+                    },
                     {color: "#F2CF5B", fields: fields}
                 ]
             };
