@@ -34,12 +34,17 @@ exports.execute = (req, res) => {
                 text: "",
                 attachments: [
                     {
-                     "label": "Assignee",
+                          {color: "#F2CF5B", fields: fields},
+                    "actions": [
+                {
+           
   "name": "bug_assignee",
   "type": "select",
   "data_source": "users"
-                    },
-                    {color: "#F2CF5B", fields: fields}
+                    }
+                    
+                ]
+                  
                 ]
             };
            res.json(message);
