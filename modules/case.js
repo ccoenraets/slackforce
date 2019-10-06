@@ -29,7 +29,7 @@ exports.execute = (req, res) => {
            
             fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + data.id, short:false});
            let message = {
-                text: "A new case has been created:",
+                text: "",
                 attachments: [
                     {color: "#F2CF5B", fields: fields}
                 ]
