@@ -26,15 +26,14 @@ exports.execute = (req, res) => {
         })
         .then(data => {
             let fields = [];
-            fields.push({title: "Subject", value: subject, short:false});
-            fields.push({title: "Description", value: description, short:false});
+           
             fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + data.id, short:false});
-          /*  let message = {
+           let message = {
                 text: "A new case has been created:",
                 attachments: [
                     {color: "#F2CF5B", fields: fields}
                 ]
-            };*/
+            };
             //res.json(fields);
         })
         .catch((error) => {
