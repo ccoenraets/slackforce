@@ -34,11 +34,11 @@ exports.execute = (req, res) => {
                 text: "",
                 attachments: [
                     {
-                          {color: "#F2CF5B", fields: fields},
+                          color: "#F2CF5B", fields: fields,
                     "actions": [
                 {
            
-  "name": "bug_assignee",
+  "name": "case_owner",
   "type": "select",
   "data_source": "users"
                     }
