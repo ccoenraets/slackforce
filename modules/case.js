@@ -46,7 +46,7 @@ exports.execute = (req, res) => {
                     "name": "Assign Owner",
                     "text": "Assign Owner",
                     "type": "button",
-                      "url":"https://poojahqg-dev-ed.my.salesforce.com/5000o00002etFxpAAE";
+                   
                     "value": "Assign owner"
                 }
                       
