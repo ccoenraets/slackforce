@@ -41,7 +41,13 @@ exports.execute = (req, res) => {
   "name": "case_owner",
   "type": "select",
   "data_source": "users"
-                    }
+                    },
+                         {
+                    "name": "Assign Owner",
+                    "text": "Assign Owner",
+                    "type": "button",
+                    "value": "Assign owner"
+                }
                     
                 ]
         }   
