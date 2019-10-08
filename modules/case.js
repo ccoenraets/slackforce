@@ -16,7 +16,7 @@ exports.execute = (req, res) => {
         params = req.body.text.split(":"),
         subject = params[0],
         description = params[1];
-
+    
     force.create(oauthObj, "Case",
         {
             subject: subject,
@@ -39,7 +39,7 @@ exports.execute = (req, res) => {
                 {
            
   "name": "case_owner",
-  "type": "select",
+  "type": "external-select",
   "data_source": "users"
                     },
                          {
