@@ -10,6 +10,9 @@ exports.execute = (req, res) => {
         res.send("Invalid token");
         return;
     }
+ let slackUserId = req.body.user_id,
+        oauthObj = auth.getOAuthObject(slackUserId),
+        q = "SELECT Id, Name FROM  users LIMIT 5";
 
     let slackUserId = req.body.user_id,
         oauthObj = auth.getOAuthObject(slackUserId),
@@ -40,7 +43,7 @@ exports.execute = (req, res) => {
            
   "name": "case_owner",
   "type": "external-select",
-  "data_source": "users"
+  "data_source": "q"
                     },
                          {
                     "name": "Assign Owner",
