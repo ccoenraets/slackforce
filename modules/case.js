@@ -34,10 +34,9 @@ exports.execute = (req, res) => {
             let message = {
                 text: "A new case has been created:",
                 attachments: [
-                    {
-                          color: "#F2CF5B", fields: fields,
-                
-            };
+                     attachments: [
+                    {color: "#F2CF5B", fields: fields}
+                ]
            res.json(message);
         })
         .catch((error) => {
