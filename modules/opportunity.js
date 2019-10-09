@@ -10,6 +10,7 @@ exports.execute = (req, res) => {
     if (req.body.token != OPPORTUNITY_TOKEN) {
         res.send("Invalid token");
         return;
+        
     }
 
     let slackUserId = req.body.user_id,
