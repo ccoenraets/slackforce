@@ -28,35 +28,15 @@ exports.execute = (req, res) => {
             status: "New"
         })
         .then(data => {
-            let fields = [];
-           
+           fields.push({title: "Subject", value: subject, short:false});
+            fields.push({title: "Description", value: description, short:false});
             fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + data.id, short:false});
-         
- 
-        let message = {
-                text: "",
+            let message = {
+                text: "A new case has been created:",
                 attachments: [
                     {
                           color: "#F2CF5B", fields: fields,
-                    "actions": [
-                {
-           
-  "name": "case_owner",
-  "type": "external-select",
-  "data_source": "q"
-                    },
-                         {
-                    "name": "Assign Owner",
-                    "text": "Assign Owner",
-                    "type": "button",
-                   
-                    "value": "Assign owner"
-                }
-                      
-                    
-                ]
-        }   
-                ]
+                
             };
            res.json(message);
         })
