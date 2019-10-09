@@ -1,4 +1,4 @@
-use strict";
+"use strict";
 
 let auth = require("./slack-salesforce-auth"),
     force = require("./force"),
