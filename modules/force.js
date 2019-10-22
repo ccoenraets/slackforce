@@ -39,7 +39,7 @@ let sfrequest = (oauth, path, options) => new Promise((resolve, reject) => {
                 // Could implement refresh token and retry logic here
                 reject({code: 401});
             } else {
-                reject(error);
+                reject({hy});
             }
         } else {
             resolve(body);
