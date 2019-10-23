@@ -42,6 +42,8 @@ exports.oauthCallback = (req, res) => {
     var slackUserId = req.query.state;
 
     let options = {
+    return new Promise((resolve, reject) => {
+          resolve({
         url: `${SF_LOGIN_URL}/services/oauth2/token`,
         qs: {
             grant_type: "authorization_code",
@@ -50,6 +52,8 @@ exports.oauthCallback = (req, res) => {
             client_secret: SF_CLIENT_SECRET,
             redirect_uri: `https://${req.hostname}/oauthcallback`
         }
+})
+});
     };
 
     request.post(options, function (error, response, body) {
