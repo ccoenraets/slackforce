@@ -28,8 +28,9 @@ exports.loginLink = (req, res) => {
         res.send("Invalid token");
         return;
     }
-
-    res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/`+req.body.user_id);
+res.writeHead(200, { 'Content-Type': 'application/json' });
+res.connection.setTimeout(0); // this could take a while
+res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/`+req.body.user_id);
 
 };
 
