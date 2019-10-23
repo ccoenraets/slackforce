@@ -16,7 +16,7 @@ exports.logout = (req,res) => {
     }
 
     let slackUserId = req.body.user_id;
-   // delete mappings[slackUserId];
+    delete mappings[slackUserId];
 
     res.send({text: "Logged out"});
 
