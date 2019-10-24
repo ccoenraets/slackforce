@@ -28,16 +28,15 @@ exports.loginLink = (req, res) => {
         res.send("Invalid token");
         return;
     }
-res.writeHead(200, { 'Content-Type': 'application/json' });
-res.connection.setTimeout(0); // this could take a while
+
 res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/`+req.body.user_id);
 
 };
 
 exports.oauthLogin = (req, res) => {
-     return Promise.resolve({
+    
     res.redirect(`${SF_LOGIN_URL}/services/oauth2/authorize?response_type=code&client_id=${SF_CLIENT_ID}&redirect_uri=https://${req.hostname}/oauthcallback&state=${req.params.slackUserId}`);
-                            })
+                           
                             };
 
 exports.oauthCallback = (req, res) => {
@@ -45,7 +44,7 @@ exports.oauthCallback = (req, res) => {
     var slackUserId = req.query.state;
 
     let options = {
-    return new Promise((resolve, reject) => {
+    
           resolve({
         url: `${SF_LOGIN_URL}/services/oauth2/token`,
         qs: {
@@ -55,7 +54,6 @@ exports.oauthCallback = (req, res) => {
             client_secret: SF_CLIENT_SECRET,
             redirect_uri: `https://${req.hostname}/oauthcallback`
         }
-})
 });
     };
 
