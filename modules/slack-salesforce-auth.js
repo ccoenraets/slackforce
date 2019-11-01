@@ -48,7 +48,7 @@ exports.oauthCallback = (req, res) => {
           resolve({
         url: `${SF_LOGIN_URL}/services/oauth2/token`,
         qs: {
-            grant_type: "authorization_code",
+            grant_type: "refresh_token",
             code: req.query.code,
             client_id: SF_CLIENT_ID,
             client_secret: SF_CLIENT_SECRET,
