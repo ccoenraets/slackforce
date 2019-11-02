@@ -35,7 +35,7 @@ res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/`
 
 exports.oauthLogin = (req, res) => {
     
-    res.redirect(oauth2.getAuthorizationUrl());
+    res.redirect(oauth2.getAuthorizationUrl({ scope: 'api id web refresh_token' }));
                            
                             };
 
