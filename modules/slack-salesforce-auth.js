@@ -35,7 +35,7 @@ res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/`
 
 exports.oauthLogin = (req, res) => {
     
-    res.redirect(`${SF_LOGIN_URL}/services/oauth2/authorize?response_type=code&client_id=${SF_CLIENT_ID}&redirect_uri=https://${req.hostname}/oauthcallback&state=${req.params.slackUserId}`);
+    res.redirect(oauth2.getAuthorizationUrl());
                            
                             };
 
@@ -48,7 +48,7 @@ exports.oauthCallback = (req, res) => {
           resolve({
         url: `${SF_LOGIN_URL}/services/oauth2/token`,
         qs: {
-            grant_type: "refresh_token",
+            grant_type: "authorization_code",
             code: req.query.code,
             client_id: SF_CLIENT_ID,
             client_secret: SF_CLIENT_SECRET,
