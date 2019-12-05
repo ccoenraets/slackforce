@@ -1,38 +1,37 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
-  "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "name": "assignee",
+  "version": "1.0.0",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "@slack/web-api": "^5.5.0",
-    "axios": "^0.19.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.16.4",
-    "http": "0.0.0",
-    "https": "^1.0.0",
-    "json-parse": "^1.0.3",
-    "node-rest-client": "^3.1.0",
-    "node-slack": "0.0.7",
-    "parse": "^2.9.1",
-    "parse-json": "^5.0.0",
-    "node-keepalive": "^0.0.1"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "8.x"
+    "node": "8.4.0"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
+    "type": "git",
+    "url": "pooja241"
   },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+  "author": "pooja singh",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/client": "^4.1.0",
+    "@slack/events-api": "^2.3.0",
+    "@slack/interactive-messages": "^0.2.0",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "interactive": "^0.1.9",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.map": "^4.6.0",
+    "nforce": "^1.12.2",
+    "node-salesforce": "^0.8.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "node-keepalive": "^0.0.1",
+    "node-cron-link": "^0.0.3"
+  }
 }

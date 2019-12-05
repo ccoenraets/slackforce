@@ -1,78 +1,162 @@
+require('dotenv').config();
+const http = require("http");
+const express = require("express"),
+  bodyParser = require("body-parser"),
+   axios = require('axios'),    
+  map = require("lodash.map"),
+  slackInteractiveMessages = require("@slack/interactive-messages"),
+  _case = require("./case"),
+      _user=require("./user"),
+  SLACK_VERIFICATION_TOKEN = "tUENoQHFJXv2sfEA8cr6FRIK",
+      SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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",
+  app = express();
+const casenumber2='';
+app.set("port", process.env.PORT || 0);
+app.use(bodyParser.urlencoded({ extended: false }));
+/*app.get("/", function(req,res){
+  console.log("ASaghdghghaghdas");
+  res.send("asasasasas Pooja");
+})*/
+app.post("/caseassign", _case.execute);
 
-const express = require("express");
-const http = require("https");
-const bodyparser=require("body-parser");
-var Parse = require('parse');
-const axios=require("axios");
-const { WebClient } = require('@slack/web-api');
-var Slack = require('node-slack');
-var Client = require('node-rest-client').Client;
-const app = express();
-const  SLACK_VERIFICATION_TOKEN =  process.env.SLACK_VERIFICATION_TOKEN;
-const Workspace=process.env.Workspace;
-app.use(express.static("public"));
-app.use(bodyparser.json());
 
-app.post('/', (req, res) => {
+let slackMessages = slackInteractiveMessages.createMessageAdapter(SLACK_VERIFICATION_TOKEN);
   
-console.log('welcome',res);
-let cname=req.body.Account.Name;
-  let naming =cname.toLowerCase();
-  console.log('naming',naming);
-  let finalname=naming.replace(/\s/g,'');
-let secfinal=finalname.replace(/,/g,'_');
-   console.log('secfinal',secfinal);
-  console.log('finalname',finalname);
-          let fields = [];
-         let subject;
-   
-  console.log('data',req.body);
-            fields.push({title: "Subject", value:req.body.Subject, short:false});
-            fields.push({title: "Description", value: req.body.Description, short:false});
-             fields.push({title: "AccountName", value:req.body.Account.Name , short:false});
-            fields.push({title: "CaseNumber", value: req.body.CaseNumber, short:false});
-  
-            console.log('case',fields);
-              let message = {
-                text: "A new case has been created/updated:",
-              //attachments: 
-            };
-       console.log('hy1');
-     
-      const url="https://slack.com/api/channels.create";
-   
-       const headers = {
-      
-    "Content-Type": "application/json",
-    "token": `xoxp-701650376675-701650377683-835791408581-cf0f1607d1353e00063de5b0320686ea`,
-        // "HTTP ":'Post',
-         "name":'req.body.Account.Name'
-     
-  };
-  http.get('https://slack.com/api/channels.create?token='+'xoxp-701650376675-701650377683-835791408581-cf0f1607d1353e00063de5b0320686ea'+'&name='+secfinal,(response)=>{
-     http.get('https://slack.com/api/chat.postMessage?token='+'xoxp-701650376675-701650377683-835791408581-cf0f1607d1353e00063de5b0320686ea'+'&channel='+secfinal+'&text='+'the case is created and updated:\n'+
-             'casenumber:'+req.body.CaseNumber+'\n'+'subject:'+req.body.Subject+'\n'+'Description:'+req.body.Description+'\n'+'Status:'+req.body.Status+'\n'+'Account:'+cname
-              ,(res)=>
-               {
-       //  console.log('response',res);
-       });
-  
-  })
-  
-  res.send('Welcome !!');
 
+function findAttachment(message, actionCallbackId) {
+    return message.attachments.find(a => a.callback_id === actionCallbackId);
+}
+slackMessages.action("start:order", (payload, respond) => {
+  console.log("index 6");
+ 
+  console.log("qwert",payload,"End Qwert");
+  
+let casenumber=payload.actions[0].name;
+  startOrder(casenumber)
+        .then(respond)
+        .catch(console.error);
+  let casenumber1= casenumber.split();
+  console.log('anything',casenumber1[0]);
+ casenumber2=casenumber1[0];
+   console.log('anything',casenumber2);
+  console.log("payload.user.id" + payload.user.id);
+  
+})
+function findSelectedOption(originalMessage, actionCallbackId, selectedValue) {
+    const attachment = findAttachment(originalMessage, actionCallbackId);
+    return attachment.actions[0].options.find(o => o.value === selectedValue);
+}
+slackMessages.action('order:select_type', (payload, respond) => {
+  console.log("wrt",payload,payload.actions[0].selected_options,"wrt end");
+  const updatedMessage = "Owner Is assigned";
+    //const selectedType = findSelectedOption(payload.original_message, 'order:select_type', payload.actions[0].selected_options[0].value);
+  console.log('selected value',payload.actions[0].selected_options[0].value);
+  assignowner( payload.actions[0].selected_options[0].value,casenumber2)
+ .then(() => {
+      respond({ text: 'Owner Is changed Successfully' });
     })
+  
+    
+  
+        })
+   
+  let responseData;
+let userId
+
+function startOrder(casenumber)
+  {
+    console.log("here");
+   return new Promise((resolve, reject) => {
+      listOfTypes(casenumber).then(rData => {
+          responseData = rData;
+          console.log("Kuch Hua?", rData);
+          resolve({
+              text: 'Change Owner:'+casenumber,
+              attachments: [{
+                  color: '#5A352D',
+                  callback_id: 'order:select_type',
+                text:casenumber,
+                   
+                  actions: [{
+                      pooja:casenumber,
+                      name: 'select_type',
+                      type: 'select',
+                      options: responseData, 
+                  }, ],
+              }, ],
+          });
+        reject("An error occurred while creating a case2");
+      })
+  });
+}
+function listOfTypes(casenumber) {
+
+    console.log('In this method');
+    let test=[];
+  let attachments= [];
+    return new Promise((resolve, reject) => {
+           _user.findusers('pooja')
+      .then(data=>{
+  //console.log('user.users',user.findusers);
+         data.forEach(function (us) {
+            let fields = [];
+          //  user.users.forEach(users=> {
+     // resp['records'][0]['_fields']['subject']
+            fields.push({ title: "Id", value:us.getId(), short: true });
+            fields.push({ title: "Name", value:us.get("Name"), short: true });
+            test.push({ text:us.get("Name") , value: us.getId()+"#$#"+casenumber+"#$#"+us.get("Name"),case:casenumber });
+          });
+            resolve(test);
+          
+         reject("An error occurred while creating a case1");
+         })
+  
+    });
+
+     }
+ 
+
+let ownerId
+function assignowner(ownerId)
+{
+   let casenumber4=ownerId.split('#$#');
+  console.log('owner',ownerId);
+  let cownerId=casenumber4[0];
+  let casenumber5=casenumber4[1];
+  let caseownername= casenumber4[2];
+  console.log('casenumber2',casenumber5);
+  _user.changeowner([cownerId,casenumber5]);
+  return axios.post(SLACK_WEBHOOK_URL, {
+     
+      attachments: [
+        {
+          color: '#5A352D',
+          title: 'owner ('+caseownername+')'+' is assigned to the case: '+casenumber5
+     },],
+    }).then(() => Promise.resolve({
+      text: `Your owner is sucessfully changed`,
+    }));
+}
+        
+//app.use(bodyParser.json());
+app.use("/slack/actions", slackMessages.expressMiddleware());
+
+console.log(slackMessages.expressMiddleware);
 var keepAlive = require("node-keepalive");
 //keepAlive({}, app);
+
 app.get("/", (request, response) => {
   console.log(Date.now() + " Ping Received");
   response.sendStatus(200);
 });
-  const listener = app.listen(process.env.PORT, function() {
-  setInterval(() => {
-  http.get(`https://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+http.createServer(app).listen(app.get("port"), () => {
+   setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
-  
-  console.log("Your app is listening on port " + listener.address().port);
+
+  console.log(`server listening on port ${app.get("port")}`);
 });
-   
+var cronLink = require("node-cron-link");
+cronLink("https://roomy-subway.glitch.me/keepalive", {time:2, kickStart: true});
+cronLink("https://rogue-triceratops.glitch.me/keepalive", {time:2, kickStart: true});
+
