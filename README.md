@@ -2,24 +2,22 @@
 
 A simple Node.js application that acts as a Slash Command message broker between Slack and Salesforce.
 
-Watch [this video](https://youtu.be/xB-1SsUoBHk) to see the application in action.
- 
-Read [this blog post](https://medium.com/@ccoenraets/slack-and-salesforce-integration-part-2-a29584c85274) for more details. 
+Watch [this video](https://youtu.be/xB-1SsUoBHk) to see the application in action. Read [this blog post](https://medium.com/@ccoenraets/slack-and-salesforce-integration-part-2-a29584c85274) for more details. 
 
 Follow the instructions below to deploy your own instance of the application:
 
 ### Step 1: Create a Connected App
 
-If you haven't already done so, follow the steps below to create a Salesforce connected app:
+A **Connected App** is a secure API endpoint on a salesforce org. In this case, it will enable an oAuth connection specifically for this slack app, complete with client ID and client secret. If you haven't already done so, follow the steps below to create a Salesforce connected app:
 
-1. In Salesforce Setup, type **Apps** in the quick find box, and click the **Apps** link
+1. In Salesforce Setup, type **App Manager** in the quick find box, and click the **App Manager** link
 
-1. In the **Connected Apps** section, click **New**, and define the Connected App as follows:
+1. Click the  **New Connected App** button on the far right, and define the Connected App as follows:
 
     - Connected App Name: MyConnectedApp (or any name you want)
     - API Name: MyConnectedApp
     - Contact Email: enter your email address
-    - Enabled OAuth Settings: Checked
+    - Enable OAuth Settings: Checked
     - Callback URL: https://myapp.herokuapp.com/oauthcallback (You'll change this later)
     - Selected OAuth Scopes: Full Access (full)
     - Click **Save**
