@@ -11,7 +11,6 @@ let express = require('express'),
     actions = require('./modules/actions'),
     app = express();
 
-
 app.enable('trust proxy');
 
 app.set('port', process.env.PORT || 5000);
