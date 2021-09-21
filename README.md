@@ -25,7 +25,7 @@ A **Connected App** is a secure API endpoint on a salesforce org. In this case, 
 ### Step 2: Deploy the Slash Commands
 
 1. Make sure you are logged in to the [Heroku Dashboard](https://dashboard.heroku.com/)
-1.1 If you don't have a heroku account, you can sign up. You will be asked for a credit card, but not charged for just hobby development.
+2. If you don't have a heroku account, you can sign up. You will be asked for a credit card, but not charged for just hobby development.
 1. Click the button below to deploy this Slash Commands service on Heroku:
 
     [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
