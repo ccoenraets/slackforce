@@ -14,23 +14,23 @@ A **Connected App** is a secure API endpoint on a salesforce org. In this case, 
 
 1. Click the  **New Connected App** button on the far right, and define the Connected App as follows:
 
-    - Connected App Name: MyConnectedApp (or any name you want)
-    - API Name: MyConnectedApp
+    - Connected App Name: SlackMySalesforce (or any name you want)
+    - API Name: SlackMySalesforce
     - Contact Email: enter your email address
     - Enable OAuth Settings: Checked
     - Callback URL: https://myapp.herokuapp.com/oauthcallback (You'll change this later)
     - Selected OAuth Scopes: Full Access (full)
     - Click **Save**
 
-### Step 2: Deploy the Slash Commands
+### Step 2: Deploy this Slash Commands repo right to Heroku
 
-1. Make sure you are logged in to the [Heroku Dashboard](https://dashboard.heroku.com/)
-2. If you don't have a heroku account, you can sign up. You will be asked for a credit card, but not charged for just hobby development.
+1. Make sure you are logged in to the [Heroku Dashboard](https://dashboard.heroku.com/). This will eventually be where you can see a list of all your heroku apps. If you don't have a heroku account, you can sign up. You will be asked for a credit card, but not charged for just hobby development.
+
 1. Click the button below to deploy this Slash Commands service on Heroku:
 
     [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-1. Fill in the config variables as described.
+1. Fill in the config variables as described. If you need to get to these later, these can be found by clicking on your App Name in the heroku dashboard, and then clicking on the subtab Settings, then the "Reveal Config Vars" button. Click the pencil to edit each one.
 
     - For **SF_CLIENT_ID**, enter the Consumer Key of your Salesforce Connected App
     - For **SF_CLIENT_SECRET**, enter the Consumer Secret of your Salesforce Connected App
@@ -41,10 +41,11 @@ A **Connected App** is a secure API endpoint on a salesforce org. In this case, 
 
 ### Step 3: Create the Slash Commands in Slack
 
-1. In a browser, go to the customization page for your Slack workspace. For example ```https://YOUR_TEAM_NAME.slack.com/customize/```. Replace ```YOUR_TEAM_NAME``` with your actual team name. Click the "hanburger" menu icon in the upper left, and open the Configure Apps menu. In the upper right, click on "Build".
-1. click on **Create New App**, and choose 'from scratch'
+1. In a browser, go to the customization page for your Slack workspace. For example ```https://YOUR_TEAM_NAME.slack.com/customize/```. Replace ```YOUR_TEAM_NAME``` with your actual team/workspace name. Click the "hanburger" menu icon in the upper left, and open the Configure Apps menu. In the upper right, click on "Build".
 
-1. choose a name 'SlackMySalesforce', and choose a workspace. click **Create App**.
+1. click on **Create New App**, and choose 'from scratch'.
+
+1. choose a name: 'SlackMySalesforce', and choose your workspace. Click **Create App**.
 
 1. On the Basic Information page for your app, open the **Add features and functionality** area.
 
@@ -69,7 +70,7 @@ A **Connected App** is a secure API endpoint on a salesforce org. In this case, 
 
 1. Back on the **Basic Information** page for the app, click on **Install your App**. You will have to do this each time you change your commands
 
-1. Go back to slack, and try one of the /commands from above . The first time you may be asked to authenticate. Once complete, you should be off and running
+1. Go back to slack, and try one of the /commands from above. The first time you may be asked to authenticate. Once complete, you should be off and running.
 
 Troubleshooting:
 1. Don't forget to change the callback in the Connected App in your salesforce org.
