@@ -39,13 +39,13 @@ A **Connected App** is a secure API endpoint on a salesforce org. In this case, 
 
 1. Once your app is deployed, go back to the Connected App in Salesforce, and change the OAuth callback URL: Use the URL of your actuall Heroku app, followd by /oauthcallback. For example: https://mynewapp.herokuapp.com/oauthcallback
 
-### Step 3: Create the Slash Commands in Slack
+### Step 3: Create the Slack App & Enable Slack Commands
 
 1. In a browser, go to the customization page for your Slack workspace. For example ```https://YOUR_TEAM_NAME.slack.com/customize/```. Replace ```YOUR_TEAM_NAME``` with your actual team/workspace name. Click the "hanburger" menu icon in the upper left, and open the Configure Apps menu. In the upper right, click on "Build".
 
-1. click on **Create New App**, and choose 'from scratch'.
+1. Click on **Create New App**, and choose 'from scratch'.
 
-1. choose a name: 'SlackMySalesforce', and choose your workspace. Click **Create App**.
+1. Choose a name: 'SlackMySalesforce', and choose your workspace. Click **Create App**.
 
 1. On the Basic Information page for your app, open the **Add features and functionality** area.
 
@@ -73,8 +73,8 @@ A **Connected App** is a secure API endpoint on a salesforce org. In this case, 
 1. Go back to slack, and try one of the /commands from above. The first time you may be asked to authenticate. Once complete, you should be off and running.
 
 Troubleshooting:
-1. Don't forget to change the callback in the Connected App in your salesforce org.
-1. You will not see anything at the home URL for your heroku app, when viewed from the browser. It will be a blank page
-1. You will not be able to test your heroku app from your browser for the /account and other commands, since these only work for POST operations. you can do some limited testing using cURL: 'curl -X POST -H 'Content-type: application/json' --data '{"text":"Tycoo"}' http://127.0.0.1:5000/'  . However, some slack vars like the user id will not be available.
-1. Check your heroku logs in realtime from a terminal window with 'heroku logs --tail'
-1. Don't be afraid to use console.log in your code to check variables, which you will see in the heroku logs.
+1. After step 2.4, don't forget to update the callback in the Connected App in your salesforce org.
+1. You will not see anything at the home URL for your heroku app, when viewed from the browser. It will be a blank page. That is normal.
+1. You will not be able to test your heroku app from your browser for the /account and other commands, since these only work for POST operations. You CAN do some limited testing using cURL: 'curl -X POST -H 'Content-type: application/json' --data '{"text":"Tycoo"}' http://127.0.0.1:5000/'  . However, some slack vars like the user id will not be available.
+1. Check your heroku logs in realtime from a terminal window with 'heroku logs --tail' command
+1. Don't be afraid to use console.log() in your code to check variables, which you will see in the heroku logs.
