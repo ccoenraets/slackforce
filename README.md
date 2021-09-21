@@ -68,11 +68,13 @@ A **Connected App** is a secure API endpoint on a salesforce org. In this case, 
 
 1. Repeat these steps to create another Slash command called **/whoami**, calling ```https://your-heroku-app.herokuapp.com/whoami```. 
 
+### Step 4: Install and Launch your commands!
+
 1. Back on the **Basic Information** page for the app, click on **Install your App**. You will have to do this each time you change your commands
 
 1. Go back to slack, and try one of the /commands from above. The first time you may be asked to authenticate. Once complete, you should be off and running.
 
-Troubleshooting:
+### Troubleshooting:
 1. After step 2.4, don't forget to update the callback in the Connected App in your salesforce org.
 1. You will not see anything at the home URL for your heroku app, when viewed from the browser. It will be a blank page. That is normal.
 1. You will not be able to test your heroku app from your browser for the /account and other commands, since these only work for POST operations. You CAN do some limited testing using cURL: 'curl -X POST -H 'Content-type: application/json' --data '{"text":"Tycoo"}' http://127.0.0.1:5000/'  . However, some slack vars like the user id will not be available.
