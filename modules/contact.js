@@ -1,15 +1,9 @@
 "use strict";
 
 let auth = require("./slack-salesforce-auth"),
-    force = require("./force"),
-    CONTACT_TOKEN = process.env.SLACK_CONTACT_TOKEN;
+    force = require("./force");
 
 exports.execute = (req, res) => {
-
-    if (req.body.token != CONTACT_TOKEN) {
-        res.send("Invalid token");
-        return;
-    }
 
     let slackUserId = req.body.user_id,
         oauthObj = auth.getOAuthObject(slackUserId),
